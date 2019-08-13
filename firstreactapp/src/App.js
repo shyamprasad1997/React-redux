@@ -31,7 +31,7 @@ class App extends React.Component {
             <div className ="list1">
             <div className="inside_list">
               <div className="fas fa-address-card"></div>
-              <span className="text"><h3>Name: {item.name}<br></br> Email: {item.email}</h3><h4><strong>Feedback: </strong>{item.feeedback}</h4></span>
+              <span className="text"><h3>Name: {item.name}</h3><h4><strong>Email: </strong>{item.email}<br></br><strong>Feedback: </strong>{item.feeedback}</h4></span>
               </div>
             </div>
           </li>
