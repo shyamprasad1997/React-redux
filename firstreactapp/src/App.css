@@ -19,6 +19,29 @@
   color: white;
 }
 
+.list
+{
+  list-style-type: none; 
+}
+
+.inside_list{
+  display: inline;
+  width:100%;
+
+}
+.fa-address-card
+{
+  font-size: 100px;
+  display: inline;
+  margin-right: 40px;
+}
+
+.text
+{
+  display: inline;
+  position: absolute;
+}
+
 .App-link {
   color: #61dafb;
 }
@@ -30,4 +53,14 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+h4{
+  font-weight: 100;
+}
+.list1
+{
+  list-style-type: none;
+  padding: 0px 0px 20px 15px ;
+  border-style: solid;
 }
