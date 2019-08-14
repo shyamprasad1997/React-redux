@@ -1,5 +1,7 @@
 import React from 'react';
 import './App.css';
+import List from '../Feedback/List.js';
+import Header from '../Header/Header.js';
 
 const feedback = 
 [ 
@@ -25,18 +27,14 @@ const feedback =
 class App extends React.Component {
   render(){
   return (
-      <ul>
-        {feedback.map(item => (
-          <li className ="list">
-            <div className ="list1">
-            <div className="inside_list">
-              <div className="fas fa-address-card"></div>
-              <span className="text"><h3>Name: {item.name}</h3><h4><strong>Email: </strong>{item.email}<br></br><strong>Feedback: </strong>{item.feeedback}</h4></span>
-              </div>
-            </div>
-          </li>
-        ))}
-      </ul>    
+    <div>
+     <Header />
+     <ul>
+     {feedback.map(item => (
+       List(item)
+     ))}
+     </ul> 
+     </div> 
   );  
   }
 }
