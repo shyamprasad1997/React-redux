@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import List from '../Feedback/List.js';
-import Header from '../Header/Header.js';
+import List from './Components/Feedback/List.js';
+import Header from './Components/Header/Header.js';
 
 const feedback = 
 [ 
