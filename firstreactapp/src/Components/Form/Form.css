@@ -1,4 +1,30 @@
 .Form
 {
-    display: none;
+    margin:20px;
+    width: auto;
+}
+input{
+    margin: 5px;
+    width: 90%;
+}
+textarea{
+    margin: 5px;
+    width: 90%;
+}
+
+.button{
+    border: none;
+    margin:20px;
+    width: auto;
+    padding: 16px 32px;
+    border-radius: 10px;
+}
+  
+.button:hover {
+    margin:20px;
+    width: auto;
+    background-color: rgb(0,0,0);
+    color: white;
+    border-radius: 10px;
+    transition-duration: .25s;
 }

@@ -3,7 +3,6 @@ import './App.css';
 import List from './Components/Feedback/List.js';
 import Header from './Components/Header/Header.js';
 import Form from './Components/Form/Form.js';
-import { isFlowBaseAnnotation } from '@babel/types';
 
 class App extends React.Component {
 	constructor(){
@@ -32,21 +31,35 @@ class App extends React.Component {
 			feeedback: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took"
 			}
 			],
-			show:false
+			show:false,		
+			email:"",
+            name:"",
+            feed:"",
 		}
-  	}
-
-  	callbackFunction = (fname, femail, feed) => {
-		let tempState = this.state.feedback;
-		tempState.push({name:fname,email:femail,feeedback:feed});
+	}
+	  
+	edit = (e) => {
+		e.preventDefault();
+		this.toggle();
 		this.setState({
-			feedback: tempState
+			email:e.target[0].value,
+            name:e.target[1].value,
+            feed:e.target[2].value,
+		})
+	}
+
+	stateSetter = (obj) => { 
+		this.setState({
+			feedback: obj
 		});
 	}
 	
 	toggle(e)
 	{	
 		this.setState({
+			email:"",
+            name:"",
+            feed:"",
 			show: !this.state.show
 		});
 	}
@@ -55,11 +68,13 @@ class App extends React.Component {
   	return (
 		<div>
 			<Header />
-			{this.state.show ? <Form parentCallback = {this.callbackFunction} toggle = {this.toggle.bind(this)}/> : <button onClick={this.toggle.bind(this)} type ="button" >Add feedback</button>}
+			{this.state.show ?
+				<Form toggle = {this.toggle.bind(this)} stat={this.state} setter= {this.stateSetter.bind(this)}/> :
+					<center><br></br><button onClick={this.toggle.bind(this)} type ="button" >Add feedback</button></center>}
 			<ul>
-				{this.state.feedback.map(item => (
-				List(item)
-				))}
+			{this.state.feedback.map((item, index) => {
+				return (<List item={item} edit={this.edit} />)
+				})}
 			</ul> 
 		</div> 
   );  
