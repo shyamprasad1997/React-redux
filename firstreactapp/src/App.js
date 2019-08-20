@@ -3,6 +3,7 @@ import './App.css';
 import List from './Components/Feedback/List.js';
 import Header from './Components/Header/Header.js';
 import Form from './Components/Form/Form.js';
+import { isFlowBaseAnnotation } from '@babel/types';
 
 class App extends React.Component {
 	constructor(){
@@ -30,23 +31,31 @@ class App extends React.Component {
 			email: 'jack@gmail.com',
 			feeedback: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took"
 			}
-			]
+			],
+			show:false
 		}
   	}
 
   	callbackFunction = (fname, femail, feed) => {
-		var tempState = this.state.feedback;
+		let tempState = this.state.feedback;
 		tempState.push({name:fname,email:femail,feeedback:feed});
 		this.setState({
 			feedback: tempState
 		});
-    }
-  	render(){
+	}
+	
+	toggle(e)
+	{	
+		this.setState({
+			show: !this.state.show
+		});
+	}
 
+  	render(){
   	return (
 		<div>
 			<Header />
-			<Form parentCallback = {this.callbackFunction}/>
+			{this.state.show ? <Form parentCallback = {this.callbackFunction} toggle = {this.toggle.bind(this)}/> : <button onClick={this.toggle.bind(this)} type ="button" >Add feedback</button>}
 			<ul>
 				{this.state.feedback.map(item => (
 				List(item)

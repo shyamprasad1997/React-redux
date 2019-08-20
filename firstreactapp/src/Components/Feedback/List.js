@@ -2,7 +2,7 @@ import React from 'react';
 
 const List = (item) => {
     return(
-            <li className ="list">
+            <li className ="list" key={item.email}>
                 <div className ="list1">
                     <div className="inside_list">
                         <div className="fas fa-address-card"></div>
