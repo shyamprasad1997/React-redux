@@ -50,7 +50,7 @@ class Form extends React.Component{
         <div className="Form">
             <center>
             <form onSubmit={this.submit.bind(this)} >
-                <input placeholder="Name" name="name" 
+                <input placeholder="Name" name="name" readOnly={this.state.editable} 
                     value={this.state.name} 
                     onChange={this.handleChange.bind(this)} 
                     required/>
