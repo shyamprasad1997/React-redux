@@ -34,7 +34,8 @@ class App extends React.Component {
 			show:false,		
 			email:"",
             name:"",
-            feed:"",
+			feed:"",
+			editable:false
 		}
 	}
 	  
@@ -44,7 +45,8 @@ class App extends React.Component {
 		this.setState({
 			email:e.target[0].value,
             name:e.target[1].value,
-            feed:e.target[2].value,
+			feed:e.target[2].value,
+			editable:true
 		})
 	}
 
@@ -60,25 +62,25 @@ class App extends React.Component {
 			email:"",
             name:"",
             feed:"",
-			show: !this.state.show
+			show: !this.state.show,
+			editable:false
 		});
 	}
-
   	render(){
   	return (
 		<div>
 			<Header />
 			{this.state.show ?
-				<Form toggle = {this.toggle.bind(this)} stat={this.state} setter= {this.stateSetter.bind(this)}/> :
+				<Form toggle = {this.toggle.bind(this)} stat={this.state} editab={this.state.editable} setter= {this.stateSetter.bind(this)}/> :
 					<center><br></br><button onClick={this.toggle.bind(this)} type ="button" >Add feedback</button></center>}
 			<ul>
 			{this.state.feedback.map((item, index) => {
-				return (<List item={item} edit={this.edit} />)
+				return (<List item={item} edit={this.edit}/>)
 				})}
 			</ul> 
 		</div> 
-  );  
-  }
+  	);  
+  	}
 }
 
 export default App;
