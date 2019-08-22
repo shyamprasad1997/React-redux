@@ -7,16 +7,19 @@ class List extends React.Component{
         super(props);
         this.state = props.stat;
         this.state.email = this.state.name = this.state.feed = "";
-        this.state.page = "/List";
         this.state.editting = false;
         this.props.setter(this.state);
     }
 
+    edit = (e) => {
+        this.props.history.push("/Form");
+        this.props.edit(e);
+    }
     render(){
     return(
         this.state.feedback.map(item => (
         <li className ="list" key={item.email}>
-            <form className="inside_list" onSubmit={this.props.edit}>
+            <form className="inside_list" onSubmit={this.edit}>
                 <div className="fas fa-address-card"></div>
                 <div className="text"><h3 >Name: {item.name}</h3>
                     <h4><strong>Email: </strong>{item.email}<br></br>

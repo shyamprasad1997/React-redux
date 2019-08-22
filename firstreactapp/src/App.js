@@ -38,7 +38,6 @@ class App extends React.Component {
             name:"",
 			feed:"",
 			editting:false,
-			page:'/index'
 		}
 	}
 
@@ -50,7 +49,6 @@ class App extends React.Component {
 			name:e.target[1].value,
 			feed:e.target[2].value,
 			editting:true,
-			page:'/Form'
 		})	
 	}
 
@@ -66,7 +64,6 @@ class App extends React.Component {
             name:"",
             feed:"",
 			editting: false,
-			page:"/index"
 		});
 	}
 
@@ -74,7 +71,6 @@ class App extends React.Component {
   	return (
 		<BrowserRouter>				
 			<Route component={Header} />
-			<Redirect to = {this.state.page} />
 			<Route path="/index" exact render={()=>{return(
 				<div>
 					<center>

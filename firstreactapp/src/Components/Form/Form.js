@@ -8,8 +8,6 @@ class Form extends React.Component{
     constructor(props){
         super(props);  
         this.state = props.stat;
-        this.state.page="/Form";
-        this.props.setter(this.state);
     }
 
     submit(event)
@@ -20,6 +18,7 @@ class Form extends React.Component{
             {
                 this.state.feedback[i].feeedback = event.target[2].value;
                 this.props.setter(this.state);
+                this.props.history.push("/index");
                 this.toggle();
                 return;                 
             }   
@@ -34,6 +33,7 @@ class Form extends React.Component{
     toggle = ()=>
     {
         this.props.toggle();
+        this.props.history.push("/index");
     }
 
     handleChange(e)
