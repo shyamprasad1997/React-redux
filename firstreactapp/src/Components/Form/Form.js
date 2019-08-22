@@ -1,15 +1,12 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-
 import './Form.css';
 
 class Form extends React.Component{    
     constructor(props){
         super(props);  
         this.state = props.stat;
-        this.state.page="/Form";
-        this.props.setter(this.state);
     }
 
     submit(event)
@@ -20,6 +17,7 @@ class Form extends React.Component{
             {
                 this.state.feedback[i].feeedback = event.target[2].value;
                 this.props.setter(this.state);
+                this.props.history.push("/");
                 this.toggle();
                 return;                 
             }   
@@ -34,6 +32,7 @@ class Form extends React.Component{
     toggle = ()=>
     {
         this.props.toggle();
+        this.props.history.push("/");
     }
 
     handleChange(e)
@@ -41,7 +40,7 @@ class Form extends React.Component{
         this.setState({[e.target.name]: e.target.value});    
     }
     render(){
-        return(  
+        return(
         <div className="Form">
             <center>
             <form onSubmit={this.submit.bind(this)} >
