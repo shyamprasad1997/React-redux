@@ -1,4 +1,7 @@
 import React from 'react';
+import { BrowserRouter, Route, Link, Redirect } from 'react-router-dom';
+
+
 import './App.css';
 import List from './Components/Feedback/List.js';
 import Header from './Components/Header/Header.js';
@@ -31,54 +34,80 @@ class App extends React.Component {
 			feeedback: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took"
 			}
 			],
-			show:false,		
 			email:"",
             name:"",
 			feed:"",
-			editable:false
+			editting:false,
+			page:'/index'
 		}
 	}
-	  
-	edit = (e) => {
+
+	edit = (e) => {		
 		e.preventDefault();
 		this.toggle();
 		this.setState({
 			email:e.target[0].value,
-            name:e.target[1].value,
+			name:e.target[1].value,
 			feed:e.target[2].value,
-			editable:true
-		})
+			editting:true,
+			page:'/Form'
+		})	
 	}
 
 	stateSetter = (obj) => { 
-		this.setState({
-			feedback: obj
-		});
+		this.setState(obj);
 	}
-	
-	toggle(e)
-	{	
+
+	toggle = (e) =>
+	{
+		console.log("2");
 		this.setState({
 			email:"",
             name:"",
             feed:"",
-			show: !this.state.show,
-			editable:false
+			editting: false,
+			page:"/index"
 		});
 	}
+
   	render(){
   	return (
-		<div>
-			<Header />
-			{this.state.show ?
-				<Form toggle = {this.toggle.bind(this)} stat={this.state} setter= {this.stateSetter.bind(this)}/> :
-					<center><br></br><button onClick={this.toggle.bind(this)} type ="button" >Add feedback</button></center>}
-			<ul>
-			{this.state.feedback.map((item, index) => {
-				return (<List item={item} edit={this.edit}/>)
-				})}
-			</ul> 
-		</div> 
+		<BrowserRouter>				
+			<Route component={Header} />
+			<Redirect to = {this.state.page} />
+			<Route path="/index" exact render={()=>{return(
+				<div>
+					<center>
+						<br></br><br></br>
+						<Link to='/List'>Show Feedbacks</Link>&nbsp;&nbsp;&nbsp;
+						<Link to="/Form">Add Feedback</Link>
+					</center>
+				</div>)
+			}}/>
+
+			<Route path="/Form" exact render={()=>{return(
+				<div>
+					<center>
+						<br></br><br></br>
+						<Link to='/List'>Show Feedbacks</Link>
+						<Form ref={this.Form} toggle = {this.toggle.bind(this)} 
+							stat = {this.state} setter = {this.stateSetter.bind(this)}/>
+					</center>
+				</div>)
+			}} />
+
+			<Route path="/List" render={()=>{return(
+				<div>
+					<center>
+						<br></br><br></br>
+						<Link to="/Form">Add Feedback</Link>						
+					</center>
+						<br></br><br></br>
+						<List setter = {this.stateSetter.bind(this)} edit = {this.edit}
+						 	toggle = {this.toggle.bind(this)} stat={this.state}/>
+				</div>)
+			}} />
+		</BrowserRouter>
   	);  
   	}
 }
