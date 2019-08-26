@@ -1,6 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Link, Redirect } from 'react-router-dom';
-
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 
 import './App.css';
 import List from './Components/Feedback/List.js';
@@ -69,14 +68,14 @@ class App extends React.Component {
 
   	render(){
   	return (
-		<BrowserRouter>				
+		<BrowserRouter>	
 			<Route component={Header} />
 			<Route path="/" exact render={()=>{return(
 				<div>
 					<center>
 						<br></br><br></br>
-						<Link to='/List'>Show Feedbacks</Link>&nbsp;&nbsp;&nbsp;
-						<Link to="/Form">Add Feedback</Link>
+						<Link className="linkTag" to='/List'>Show Feedbacks</Link>&nbsp;&nbsp;&nbsp;
+						<Link className="linkTag" to="/Form">Add Feedback</Link>&nbsp;&nbsp;&nbsp;
 					</center>
 				</div>)
 			}}/>
@@ -85,7 +84,7 @@ class App extends React.Component {
 				<div>
 					<center>
 						<br></br><br></br>
-						<Link to='/List'>Show Feedbacks</Link>
+						<Link className="linkTag" to='/List'>Show Feedbacks</Link>
 						<Form ref={this.Form} toggle = {this.toggle.bind(this)} 
 							stat = {this.state} setter = {this.stateSetter.bind(this)}/>
 					</center>
@@ -96,11 +95,12 @@ class App extends React.Component {
 				<div>
 					<center>
 						<br></br><br></br>
-						<Link to="/Form">Add Feedback</Link>						
+						<Link className="linkTag" to="/Form">Add Feedback</Link>						
 					</center>
 						<br></br><br></br>
 						<List setter = {this.stateSetter.bind(this)} edit = {this.edit}
 						 	toggle = {this.toggle.bind(this)} stat={this.state}/>
+
 				</div>)
 			}} />
 		</BrowserRouter>
