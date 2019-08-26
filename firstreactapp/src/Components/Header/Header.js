@@ -3,7 +3,7 @@ import { BrowserRouter, Route, NavLink } from 'react-router-dom';
 
 import Users from './../Users/Users.js';
 
-const header = () =>{
+const header = () => {
     return(  
     <BrowserRouter>
         <div className="header">

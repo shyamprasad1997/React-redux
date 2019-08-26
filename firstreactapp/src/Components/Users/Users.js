@@ -6,14 +6,14 @@ constructor(){
   super();
   this.state = {
     userData: [],
-    numberOfitemsShown:10,
+    numberOfitemsShown:9,
     previousItemsShown:0
   }
 }
 
 componentDidMount(){
 
-  fetch('https://randomuser.me/api/?results=100')
+  fetch('https://randomuser.me/api/?results=50')
     .then(results => {
      return results.json()
     })
@@ -44,32 +44,38 @@ componentDidMount(){
 }
 
 showMore = () => {
-    this.setState({
-        previousItemsShown : this.state.numberOfitemsShown+1
-    });
-    if (this.state.numberOfitemsShown + 10 <= this.state.userData.length) {
-        this.setState(state => ({ numberOfitemsShown: state.numberOfitemsShown + 10 }));
-    } else {
-        this.setState({ numberOfitemsShown: 10,previousItemsShown:0 })
-    }
+    if ((this.state.numberOfitemsShown + 10) <= this.state.userData.length) {
+        this.setState({
+            previousItemsShown : this.state.numberOfitemsShown + 1,
+            numberOfitemsShown: this.state.numberOfitemsShown + 10 });
+    } 
+  }
+
+showLess = () => {
+    if ((this.state.previousItemsShown - 10) >= 0) {
+        this.setState({
+            previousItemsShown : this.state.previousItemsShown - 10,
+            numberOfitemsShown: this.state.previousItemsShown - 1 });
+    } 
   }
 
 render(){
-
     const itemsToShow = this.state.userData
-      .slice(this.state.previousItemsShown, this.state.numberOfitemsShown)
+      .slice(this.state.previousItemsShown, this.state.numberOfitemsShown + 1)
       .map(item => {return(item)});
 
   return(
     <div>
         <center>
             <br></br>
-            <button onClick={this.showMore}>Next</button>&nbsp;&nbsp;&nbsp;<span>Showing: {this.state.previousItemsShown} to {this.state.numberOfitemsShown}</span>
+            <button onClick={this.showLess}>Previous</button>&nbsp;&nbsp;&nbsp;<span>Showing: {this.state.previousItemsShown} to {this.state.numberOfitemsShown}</span>
+            &nbsp;&nbsp;&nbsp;<button onClick={this.showMore}>Next</button>           
         </center>
         {itemsToShow.length ? itemsToShow : ""}
         <center>
             <br></br>
-            <button onClick={this.showMore}>Next</button>&nbsp;&nbsp;&nbsp;<span>Showing: {this.state.previousItemsShown} to {this.state.numberOfitemsShown}</span>
+            <button onClick={this.showLess}>Previous</button>&nbsp;&nbsp;&nbsp;<span>Showing: {this.state.previousItemsShown} to {this.state.numberOfitemsShown}</span>
+            &nbsp;&nbsp;&nbsp;<button onClick={this.showMore}>Next</button>       
         </center>
     </div>
   )
