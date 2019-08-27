@@ -57,7 +57,6 @@ class App extends React.Component {
 
 	toggle = (e) =>
 	{
-		console.log("2");
 		this.setState({
 			email:"",
             name:"",
@@ -97,10 +96,9 @@ class App extends React.Component {
 						<br></br><br></br>
 						<Link className="linkTag" to="/Form">Add Feedback</Link>						
 					</center>
-						<br></br><br></br>
-						<List setter = {this.stateSetter.bind(this)} edit = {this.edit}
-						 	toggle = {this.toggle.bind(this)} stat={this.state}/>
-
+					<br></br><br></br>
+					<List setter = {this.stateSetter.bind(this)} edit = {this.edit}
+						toggle = {this.toggle.bind(this)} stat={this.state}/>
 				</div>)
 			}} />
 		</BrowserRouter>
